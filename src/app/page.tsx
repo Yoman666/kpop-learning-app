@@ -297,8 +297,8 @@ export default function Home() {
             Learn
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Load a music video, tap any lyric line to open the sentence panel
-            (Chinese, romanization, TTS), and save phrases with ❤️.
+            Load a music video, tap a word for a quick popup or a line for the
+            sentence panel — Chinese, pronunciation, and saved phrases with ❤️.
           </p>
         </header>
 
@@ -388,6 +388,8 @@ export default function Home() {
                     emptyDetail={panelEmpty}
                     selectedLineIndex={selectedLineIndex}
                     onSelectLine={handleSelectLyricLine}
+                    onSaveWord={saveSentence}
+                    isWordSaved={isSaved}
                   />
                   <div className="flex min-h-0 flex-col gap-3 overflow-y-auto xl:max-h-[min(64vh,640px)]">
                     <SentencePanel

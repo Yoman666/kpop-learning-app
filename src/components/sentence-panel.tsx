@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { speakKorean } from "@/lib/korean-speech";
 import type { Sentence } from "@/lib/saved-sentences-storage";
 
 type Props = {
@@ -14,21 +15,6 @@ type Props = {
   /** Whether this exact Korean line is already in saved list. */
   isSaved: boolean;
 };
-
-function speakKorean(text: string) {
-  if (typeof window === "undefined" || !text.trim()) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "ko-KR";
-  u.rate = 0.9;
-  const pickVoice = () => {
-    const voices = window.speechSynthesis.getVoices();
-    return voices.find((v) => v.lang.startsWith("ko")) ?? null;
-  };
-  const v = pickVoice();
-  if (v) u.voice = v;
-  window.speechSynthesis.speak(u);
-}
 
 export function SentencePanel({
   korean,

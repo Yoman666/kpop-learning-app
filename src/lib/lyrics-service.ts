@@ -249,6 +249,10 @@ export async function searchLyricsFromWeb(meta: VideoMeta): Promise<LyricsMatch 
   return null;
 }
 
+export async function translateKoreanToChinese(text: string): Promise<string> {
+  return translateMyMemory(text);
+}
+
 async function translateMyMemory(text: string): Promise<string> {
   const trimmed = text.trim();
   if (!trimmed) return "";
