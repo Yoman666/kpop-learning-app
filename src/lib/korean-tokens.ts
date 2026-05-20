@@ -2,7 +2,7 @@ export type LyricToken =
   | { kind: "word"; text: string }
   | { kind: "text"; text: string };
 
-const TOKEN_RE = /(\s+)|([\uAC00-\uD7A3]+)|([^\s\uAC00-\uD7A3]+)/gu;
+const TOKEN_RE = /(\s+)|([\uAC00-\uD7A3]+)|([^\s\uAC00-\uD7A3]+)/g;
 
 /** Split a lyric line into clickable Korean/English tokens and plain separators. */
 export function tokenizeKoreanLine(line: string): LyricToken[] {
@@ -21,7 +21,7 @@ export function tokenizeKoreanLine(line: string): LyricToken[] {
       continue;
     }
     if (/[\uAC00-\uD7A3]/.test(chunk)) {
-      const parts = chunk.split(/([\uAC00-\uD7A3]+)/u).filter(Boolean);
+      const parts = chunk.split(/([\uAC00-\uD7A3]+)/).filter(Boolean);
       for (const part of parts) {
         if (/^[\uAC00-\uD7A3]+$/.test(part)) {
           tokens.push({ kind: "word", text: part });
